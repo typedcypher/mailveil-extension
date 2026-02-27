@@ -228,7 +228,7 @@ describe('Edge Cases and Validation', () => {
         { title: 'Best Buy: Electronics & Tech', expected: 'Best Buy' }
       ]
       
-      testCases.forEach(({ title, expected }) => {
+      testCases.forEach(({ title, expected: _expected }) => {
         // These would be tested by the webpage-utils tests
         expect(title.length).toBeGreaterThan(0)
       })

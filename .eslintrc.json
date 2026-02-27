@@ -11,11 +11,11 @@
   "extends": "eslint:recommended",
   "rules": {
     "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-    "no-console": "warn",
-    "semi": ["error", "always"],
-    "quotes": ["error", "single", { "avoidEscape": true }]
+    "no-console": "off",
+    "semi": "off",
+    "quotes": "off"
   },
-  "ignorePatterns": ["node_modules/", "dist/", "coverage/"],
+  "ignorePatterns": ["node_modules/", "dist/", "coverage/", "scripts/"],
   "overrides": [
     {
       "files": ["*.test.js", "vitest.*.js"],

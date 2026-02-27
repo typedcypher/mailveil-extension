@@ -1,7 +1,7 @@
 // API module for MailVeil extension
 // Handles all API communication (Separation of Concerns)
 
-import { getApiUrl, syncConfig } from './config.js'
+import { getApiUrl } from './config.js'
 
 /**
  * Make an authenticated API request

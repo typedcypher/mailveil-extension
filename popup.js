@@ -4,7 +4,7 @@
 import { getUrl, isDevMode, setDevMode, updateSyncConfig } from './config.js'
 import { getSession, saveSession, clearSession } from './session.js'
 import { fetchUserPlan, fetchDestinationEmails, fetchAliases, createAlias, logout } from './api.js'
-import { sanitizeAliasInput, truncateNpub, formatAliasEmail, copyToClipboard, showButtonFeedback } from './utils.js'
+import { sanitizeAliasInput, truncateNpub, formatAliasEmail, copyToClipboard } from './utils.js'
 import { getCurrentTabInfo, getSuggestedLabel } from './webpage-utils.js'
 
 // DOM elements
@@ -361,7 +361,7 @@ async function autoPopulateLabel() {
 }
 
 // Listen for session updates from website
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
   if (message.type === 'SESSION_UPDATE' && message.session) {
     session = message.session
     saveSession(session)

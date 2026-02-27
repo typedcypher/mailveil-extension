@@ -7,7 +7,7 @@
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { JSDOM } from 'jsdom'
-import { waitFor, fireEvent } from '@testing-library/dom'
+import { fireEvent } from '@testing-library/dom'
 import '@testing-library/jest-dom'
 import fs from 'fs'
 import path from 'path'
