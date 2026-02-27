@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MailVeil</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><span class="purple">Mail</span>Veil</h1>
+    </header>
+
+    <!-- Not logged in -->
+    <div id="login-view" class="view">
+      <p class="subtitle">Create email aliases with Nostr</p>
+      <button id="login-btn" class="btn-primary">
+        Login with Nostr
+      </button>
+      <p id="login-hint" class="hint">Opens the website to sign in with your Nostr extension</p>
+      <button id="dev-toggle" class="btn-text dev-toggle">🔧 Dev mode</button>
+    </div>
+
+    <!-- Logged in -->
+    <div id="main-view" class="view hidden">
+      <div class="user-info">
+        <span id="user-npub" class="npub"></span>
+        <button id="logout-btn" class="btn-text">Logout</button>
+      </div>
+
+      <!-- Create alias form -->
+      <div class="form-section">
+        <label>Forward to:</label>
+        <select id="destination">
+          <option value="">Loading...</option>
+        </select>
+        <a id="manage-emails-link" href="#" class="small-link">Manage emails</a>
+        
+        <!-- No verified emails message -->
+        <div id="no-emails-msg" class="no-emails hidden">
+          <p>No verified emails yet.</p>
+          <a id="add-email-link" href="#" class="btn-secondary">Add Destination Email</a>
+        </div>
+        
+        <label>Label (optional):</label>
+        <input type="text" id="label" placeholder="e.g., Shopping">
+        
+        <!-- Custom alias option (Pro only) -->
+        <div id="custom-alias-section">
+          <div class="checkbox-row">
+            <input type="checkbox" id="use-custom">
+            <label for="use-custom">Custom alias name</label>
+          </div>
+          
+          <div id="custom-alias-row" class="hidden">
+            <input type="text" id="custom-alias" placeholder="my-alias">
+            <span class="domain">@mailveil.io</span>
+          </div>
+        </div>
+        
+        <!-- Upgrade hint (Free users) -->
+        <div id="upgrade-hint" class="upgrade-hint hidden">
+          <span>⚡ A random alias will be generated</span>
+          <a href="#" id="upgrade-link">Upgrade for custom aliases</a>
+        </div>
+        
+        <button id="create-btn" class="btn-primary">Create Alias</button>
+      </div>
+
+      <!-- Success message -->
+      <div id="success-view" class="hidden">
+        <div class="success-icon">✓</div>
+        <p class="success-text">Alias created!</p>
+        <div class="alias-display">
+          <span id="created-alias"></span>
+          <button id="copy-btn" class="btn-icon" title="Copy">📋</button>
+        </div>
+        <button id="create-another-btn" class="btn-secondary">Create Another</button>
+      </div>
+
+      <!-- Recent aliases -->
+      <div id="aliases-section">
+        <h3>Recent Aliases</h3>
+        <ul id="aliases-list"></ul>
+      </div>
+    </div>
+
+    <!-- Error message -->
+    <div id="error" class="error hidden"></div>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

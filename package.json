@@ -1,0 +1,43 @@
+{
+  "name": "mailveil-extension",
+  "version": "1.3.0",
+  "description": "MailVeil Chrome Extension - Create email aliases instantly with Nostr authentication",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
+    "build": "node scripts/build.js",
+    "build:zip": "node scripts/build.js --zip"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "eslint": "^8.57.0",
+    "jsdom": "^28.0.0",
+    "vitest": "^1.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "chrome-extension",
+    "nostr",
+    "email-alias",
+    "privacy",
+    "mailveil"
+  ],
+  "author": "TypedCypher",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/typedcypher/mailveil-extension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/typedcypher/mailveil-extension/issues"
+  },
+  "homepage": "https://mailveil.io"
+}
