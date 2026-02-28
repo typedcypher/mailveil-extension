@@ -175,7 +175,6 @@ Test coverage includes:
 
 ## Related Projects
 
-- [MailVeil](https://github.com/typedcypher/nostrmail) - Main MailVeil service
 - [MailVeil Website](https://mailveil.io) - Create your account
 
 ## License
