@@ -1,12 +1,12 @@
 /**
  * Popup UI Flow Integration Tests
  * 
- * Tests the actual popup UI flows using jsdom + testing-library.
+ * Tests the actual popup UI flows using happy-dom + testing-library.
  * These are E2E-style tests without needing a real browser.
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { JSDOM } from 'jsdom'
+import { Window } from 'happy-dom'
 import { fireEvent } from '@testing-library/dom'
 import '@testing-library/jest-dom'
 import fs from 'fs'
@@ -59,7 +59,6 @@ createMockChrome.storageData = {}
 const mockFetch = vi.fn()
 
 describe('Popup UI Flows', () => {
-  let dom
   let document
   let window
 
@@ -67,28 +66,24 @@ describe('Popup UI Flows', () => {
     // Reset storage
     createMockChrome.storageData = {}
     
-    // Create fresh DOM
-    dom = new JSDOM(popupHtml, {
-      url: 'chrome-extension://test/popup.html',
-      runScripts: 'outside-only',
-      pretendToBeVisual: true
-    })
-    
-    document = dom.window.document
-    window = dom.window
+    // Create fresh DOM with happy-dom
+    window = new Window({ url: 'chrome-extension://test/popup.html' })
+    document = window.document
+    document.write(popupHtml)
     
     // Inject mocks
     window.chrome = createMockChrome()
     window.fetch = mockFetch
-    window.navigator.clipboard = {
-      writeText: vi.fn().mockResolvedValue(undefined)
-    }
+    Object.defineProperty(window.navigator, 'clipboard', {
+      value: { writeText: vi.fn().mockResolvedValue(undefined) },
+      configurable: true
+    })
     
     mockFetch.mockReset()
   })
 
   afterEach(() => {
-    dom.window.close()
+    window.close()
   })
 
   describe('Initial State', () => {
@@ -322,18 +317,17 @@ describe('Popup UI Flows', () => {
 })
 
 describe('CSS Classes and Styling', () => {
-  let dom
+  let window
   let document
 
   beforeEach(() => {
-    dom = new JSDOM(popupHtml, {
-      url: 'chrome-extension://test/popup.html'
-    })
-    document = dom.window.document
+    window = new Window({ url: 'chrome-extension://test/popup.html' })
+    document = window.document
+    document.write(popupHtml)
   })
 
   afterEach(() => {
-    dom.window.close()
+    window.close()
   })
 
   it('container has correct class', () => {

@@ -4,7 +4,7 @@
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { JSDOM } from 'jsdom'
+import { Window } from 'happy-dom'
 import fs from 'fs'
 import path from 'path'
 
@@ -35,7 +35,6 @@ const createMockChrome = () => ({
 })
 
 describe('Auto-populate Label Functionality', () => {
-  let dom
   let document
   let window
   let mockChrome
@@ -43,14 +42,10 @@ describe('Auto-populate Label Functionality', () => {
   beforeEach(() => {
     mockChrome = createMockChrome()
     
-    dom = new JSDOM(popupHtml, {
-      url: 'chrome-extension://test/popup.html',
-      runScripts: 'outside-only',
-      pretendToBeVisual: true
-    })
-    
-    document = dom.window.document
-    window = dom.window
+    // Create fresh DOM with happy-dom
+    window = new Window({ url: 'chrome-extension://test/popup.html' })
+    document = window.document
+    document.write(popupHtml)
     
     // Inject mocks
     window.chrome = mockChrome
@@ -64,7 +59,7 @@ describe('Auto-populate Label Functionality', () => {
   })
 
   afterEach(() => {
-    dom.window.close()
+    window.close()
     vi.restoreAllMocks()
   })
 
